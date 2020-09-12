@@ -189,7 +189,10 @@ Item{
 
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
         anchors.fill: parent
-        cursorShape: kterminal.terminalUsesMouse ? Qt.ArrowCursor : Qt.IBeamCursor
+        // cursorShape: kterminal.terminalUsesMouse ? Qt.ArrowCursor : Qt.IBeamCursor
+        cursorShape: (kterminal.termCursorShape != Qt.BlankCursor) ? (kterminal.terminalUsesMouse ? Qt.ArrowCursor : Qt.IBeamCursor) : Qt.BlankCursor
+        hoverEnabled: true
+        
         onWheel:{
             if(wheel.modifiers & Qt.ControlModifier){
                wheel.angleDelta.y > 0 ? zoomIn.trigger() : zoomOut.trigger();
@@ -217,6 +220,7 @@ Item{
         onPositionChanged: {
             var coord = correctDistortion(mouse.x, mouse.y);
             kterminal.simulateMouseMove(coord.x, coord.y, mouse.button, mouse.buttons, mouse.modifiers);
+            console.log('simulateMouseMove');
         }
 
         function correctDistortion(x, y){
