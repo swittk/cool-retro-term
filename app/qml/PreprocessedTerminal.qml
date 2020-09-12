@@ -190,7 +190,7 @@ Item{
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
         anchors.fill: parent
         // cursorShape: kterminal.terminalUsesMouse ? Qt.ArrowCursor : Qt.IBeamCursor
-        cursorShape: kterminal.termCursorShape
+        cursorShape: (kterminal.termCursorShape != Qt.BlankCursor) ? (kterminal.terminalUsesMouse ? Qt.ArrowCursor : Qt.IBeamCursor) : Qt.BlankCursor
         hoverEnabled: true
         
         onWheel:{
